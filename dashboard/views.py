@@ -1,5 +1,20 @@
 from django.shortcuts import render
 
+import requests
+from django.conf import settings
+
 # Create your views here.
 def index(request):
-    return render(request, 'dashboard/base.html')
+
+    response = requests.get(settings.API_URL)  # URL de la API
+
+    posts = response.json()  # Convertir la respuesta a JSON
+
+    total_responses = len(posts) # Contar el número total de respuestas
+
+    data = {
+    'title': "Landing Page' Dashboard",
+    'total_responses': total_responses,
+    }
+
+    return render(request, 'dashboard/index.html', data)
