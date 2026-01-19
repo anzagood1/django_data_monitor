@@ -139,7 +139,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 API_URL = 'https://jsonplaceholder.typicode.com/posts'
 
 CSRF_TRUSTED_ORIGINS = [
-  #"https://*.app.github.dev", # Solo si utiliza Codespaces
+  "https://*.app.github.dev", # Solo si utiliza Codespaces
   "https://*.up.railway.app",
   "https://localhost:8000",
   "http://127.0.0.1:8000"   
