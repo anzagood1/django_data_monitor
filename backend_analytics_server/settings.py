@@ -124,3 +124,18 @@ STATICFILES_DIRS = [
 
 # API CONFIGURATION
 API_URL = 'https://jsonplaceholder.typicode.com/posts'
+
+CSRF_TRUSTED_ORIGINS = [
+  "https://localhost:8000",
+  "http://127.0.0.1:8000"
+]
+
+ALLOWED_HOSTS = [
+  "*",
+]
+
+# Fallo: acceso sin autenticación
+LOGIN_URL = '/login/'
+
+# Éxito: luego de autenticación exitosa
+LOGIN_REDIRECT_URL = '/'
