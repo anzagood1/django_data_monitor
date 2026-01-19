@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-2!i=c3o9bg-*ce73+(7+!$yk2ev!^-!d2!n20e&^v$oyphgp5="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -130,11 +131,16 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, STATIC_URL),
 ]
 
+STATIC_ROOT = BASE_DIR / 'assets'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # API CONFIGURATION
 API_URL = 'https://jsonplaceholder.typicode.com/posts'
 
 CSRF_TRUSTED_ORIGINS = [
-  "https://*.app.github.dev", # Solo si utiliza Codespaces
+  #"https://*.app.github.dev", # Solo si utiliza Codespaces
+  "https://*.up.railway.app",
   "https://localhost:8000",
   "http://127.0.0.1:8000"   
 ]
