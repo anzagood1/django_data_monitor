@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os 
+import pymysql
+from dotenv import load_dotenv
 
+load_dotenv()
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,8 +80,12 @@ WSGI_APPLICATION = "backend_analytics_server.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQLDATABASE'),
+        'USER': os.environ.get('MYSQLUSER'),
+        'PASSWORD': os.environ.get('MYSQLPASSWORD'),
+        'HOST': os.environ.get('MYSQLHOST'),
+        'PORT': os.environ.get('MYSQLPORT'),
     }
 }
 
@@ -126,8 +134,9 @@ STATICFILES_DIRS = [
 API_URL = 'https://jsonplaceholder.typicode.com/posts'
 
 CSRF_TRUSTED_ORIGINS = [
+  "https://*.app.github.dev", # Solo si utiliza Codespaces
   "https://localhost:8000",
-  "http://127.0.0.1:8000"
+  "http://127.0.0.1:8000"   
 ]
 
 ALLOWED_HOSTS = [
